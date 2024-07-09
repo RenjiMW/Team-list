@@ -1,0 +1,119 @@
+/* ======= CSS RESET ====== */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+//////////////////////////////
+/* ======= My styles ====== */
+
+body {
+  background-color: rgb(22, 20, 35);
+  color: antiquewhite;
+}
+
+.appHeader {
+  margin-top: 10px;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(1, 1, 8);
+}
+
+.userInterface {
+  margin-top: 20vh;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.actionBar,
+.playersList,
+.sqadList {
+  min-height: 50vh;
+  width: 20%;
+  margin: 20px;
+  border: 1px solid red;
+}
+
+.playerPreview {
+  margin-top: 50%;
+}
+
+.form-add-player {
+  border-top: 1px solid red;
+}
+
+///////// - PLAYERS LIST - //////////
+
+.player {
+  margin: 3px;
+  border: 1px solid red;
+  border-radius: 7px;
+
+  background-color: rgb(40, 36, 104);
+
+  &__info {
+    display: flex;
+    margin: 3px;
+    &__header {
+      margin-left: 10px;
+
+      display: inline-block;
+    }
+  }
+
+  &__editForm {
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+      text-align: right;
+      display: inline-block;
+      min-width: 50px;
+    }
+
+    &__inputField {
+      display: inline-block;
+      width: 100px;
+      margin-left: 5px;
+    }
+  }
+
+  &__action {
+    display: flex;
+    flex-direction: column;
+  }
+}
