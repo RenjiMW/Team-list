@@ -64,6 +64,20 @@ export default function App() {
     );
   };
 
+  /// MOVING ITEMS IN ARRAY
+  const moveItem = (fromIndex, toIndex) => {
+    setPlayers((prevItems) => {
+      const updatedItems = [...prevItems];
+      const itemToMove = updatedItems.splice(fromIndex, 1)[0];
+      updatedItems.splice(toIndex, 0, itemToMove);
+      return updatedItems;
+    });
+  };
+
+  // const handleMoveUp = () => moveItem(index, index - 1);
+
+  // const handleMoveDown = () => moveItem(index, index + 1);
+
   const handleRemovePlayer = (id) => {
     if (window.confirm("Are you sure you want to remove this player?")) {
       setPlayers((players) => players.filter((player) => player.id !== id));

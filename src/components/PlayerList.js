@@ -51,7 +51,7 @@ function Player({ players, player, onRemove, onEdit }) {
             src="\assets\images\avatar 2.webp"
             alt="anonim"
             width="60"
-            className="player-info__img"
+            className="player__info__img"
           ></img>
         ) : (
           <img
@@ -59,7 +59,7 @@ function Player({ players, player, onRemove, onEdit }) {
             onError={() => setIsError(true)}
             alt="anonim"
             width="60"
-            className="player-info__img"
+            className="player__info__img"
           ></img>
         )}
         <h2 className="player__info__header">{player.playerName}</h2>
@@ -75,47 +75,55 @@ function Player({ players, player, onRemove, onEdit }) {
       )}
 
       <div className="player__action">
+        <button>🔼</button>
         <button onClick={toggleDopdown}>OPTIONS</button>
-        {showOptions && (
-          <ul>
-            <li>
-              {/*Remove button */}
-              <button
-                type="button"
-                onClick={() => onRemove(player.id)}
-                className="player__action__button"
-              >
-                Remove
-              </button>
-            </li>
 
-            <li>
-              {/*Hide button */}
-              <button type="button" className="player__action__button">
-                Hide
-              </button>
-            </li>
-
-            <li>
-              {/*Edit button */}
-              <button
-                type="button"
-                onClick={handleShowEditForm}
-                className="player__action__button"
-              >
-                Edit
-              </button>
-            </li>
-
-            <li>
-              {/*Add to squad button */}
-              <button type="button" className="player__action__button">
-                Add to sqad
-              </button>
-            </li>
-          </ul>
-        )}
+        <button>🔽</button>
       </div>
+      {showOptions && (
+        <>
+          <div className="player__action__propperties"></div>
+          <div>
+            <ul>
+              <li>
+                {/*Remove button */}
+                <button
+                  type="button"
+                  onClick={() => onRemove(player.id)}
+                  className="player__action__button"
+                >
+                  Remove
+                </button>
+              </li>
+
+              <li>
+                {/*Hide button */}
+                <button type="button" className="player__action__button">
+                  Hide
+                </button>
+              </li>
+
+              <li>
+                {/*Edit button */}
+                <button
+                  type="button"
+                  onClick={handleShowEditForm}
+                  className="player__action__button"
+                >
+                  Edit
+                </button>
+              </li>
+
+              <li>
+                {/*Add to squad button */}
+                <button type="button" className="player__action__button">
+                  Add to sqad
+                </button>
+              </li>
+            </ul>
+          </div>
+        </>
+      )}
     </li>
   );
 }

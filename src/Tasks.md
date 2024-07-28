@@ -12,9 +12,17 @@
     - dodanie wzrostu ✔
     - dodanie ilości zagranych meczów ✔
 
+///////////////////////////////
+
+**Player info**
+
+- Przeformatować wyświetlanie info
+
 - wyświetlić dodatkowe informacje możliwe do dodania za pomocą edit
 
-  - każdy gracz może rozwinąć rozwinąć listę swoich cech, po naciśnienięciu przycskiku "details", aby wyświetlać wszystkie informacje, jednak jeśli nie ma żadnych lub któreś są brakujące to wyświetla się "?"
+  -
+
+  - każdy gracz może rozwinąć listę swoich cech, po naciśnienięciu przycskiku "details", aby wyświetlać wszystkie informacje, jednak jeśli nie ma żadnych lub któreś są brakujące to wyświetla się "?"
 
     - jak to zrobić:
       - jako dropdown menu
@@ -22,9 +30,13 @@
       - przyciski po najechaniu lekko zmieniają położenie i kolor
       - może przyciski pojawiają się do okoła przcyisku options, a całe tło się przyciemnia do puki nie dokona sie wyboru??
 
-  ***
+/// IMPORTANT
 
-  - wszystkie przyciski będą od teraz schowane w liście rozwijalnej o nazwie "options"
+Rób to co jest najprostrze, ale rób - pamiętaj małe kroski
+
+---
+
+- wszystkie przyciski będą od teraz schowane w liście rozwijalnej o nazwie "options"
 
 - dodać możliwość otwierania listy hidden
 - dodać strzałki, które będą pozwalały zmieniać pozycje na liście zawodników
