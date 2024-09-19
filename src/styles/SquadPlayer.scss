@@ -1,0 +1,97 @@
+///////// - SQUAD PLAYER - //////////
+
+.squadPlayer {
+  margin: 3px;
+  border: 1px solid red;
+  border-radius: 7px;
+  display: grid;
+  grid-template-columns: auto 76px;
+
+  background-color: rgb(40, 36, 104);
+
+  &__info {
+    display: flex;
+
+    margin: 3px;
+    min-width: fit-content;
+    max-height: 61px;
+
+    &__img {
+      height: 60px;
+      width: auto;
+      object-fit: initial;
+    }
+
+    &__header {
+      margin-left: 10px;
+
+      display: inline-block;
+    }
+  }
+
+  &__editForm {
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+      text-align: right;
+      display: inline-block;
+      min-width: 50px;
+    }
+
+    &__inputField {
+      display: inline-block;
+      width: 70px;
+      margin-left: 5px;
+    }
+  }
+
+  &__action {
+    display: flex;
+    margin-left: auto;
+    flex-direction: column;
+
+    &__propperties {
+      display: grid;
+      grid-template-columns: min-content 100%;
+      width: 100%;
+      // background-color: red;
+
+      &__names {
+        // background-color: rgb(23, 71, 96);
+        width: min-content;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: right;
+      }
+
+      &__values {
+        // background-color: rgb(110, 49, 104);
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    & button {
+      width: 76px;
+    }
+
+    &__options {
+      background-color: beige;
+      text-align: right;
+      margin-left: auto;
+      & button {
+        width: 76px;
+      }
+    }
+
+    &__mainBtns {
+      display: flex;
+
+      & button {
+        width: 50%;
+      }
+    }
+  }
+}

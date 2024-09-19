@@ -9,40 +9,51 @@ import SqadList from "./components/SquadList";
 /////////////////////////////
 /////////// APP /////////////
 
-/* Opis funckji
-#Funkja gówna 
-- zawiera 3 kawałki stanu
-  - showAddPlayer, który ma wartość booleon i 
-    pozwala wyświetlić ankietę dotyczącą dodawania nowego gracza
-  - players, który odpala funkcję, która przypisuje do zmiennej savedPlayers
-    zawartość localStorage przypisaną pod kluczem "players" 
-    oraz zawsze zwraca wartość przypisną pod savedPlayers, 
-    chyba że taka nie istenije, i w takim wypadku zwraca pustą tablię
-
-- funkcja odpala React Hook - UseEffect, który powoduje odpalenie 
-  zawartej funkcji za każdym razem, gdy nastąpo zmiana w stanie "players"
-*/
 export default function App() {
   const [showAddPlayer, setShowAddPlayer] = useState(false);
   const [players, setPlayers] = useState(() => {
     const savedPlayers = localStorage.getItem("players");
     return savedPlayers ? JSON.parse(savedPlayers) : [];
   });
+  const [matchSquad, setMatchSquad] = useState(() => {
+    const savedSquad = localStorage.getItem("matchSquad");
+    return savedSquad
+      ? JSON.parse(savedSquad)
+      : [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+  });
 
   useEffect(() => {
     localStorage.setItem("players", JSON.stringify(players));
   }, [players]);
 
-  ////// pleayer fatures props - START
-  /* Opis 'handleConfirmNewPlayer'
-    - to zmienna do której przypisana jest funkcja, która 
-      przyjmuje parametr 'player'
-    - używa funkcji zmienniającej kawałek stanu, która 
-      dodaje do tablicy nowy element
-   */
+  useEffect(() => {
+    localStorage.setItem("matchSquad", JSON.stringify(matchSquad));
+  }, [matchSquad]);
 
   const handleConfirmNewPlayer = (player) => {
     setPlayers((players) => [...players, player]);
+  };
+
+  const handleAddPlayerToSquad = (squadPlayer) => {
+    // Sprawdzamy, czy zawodnik już jest w składzie
+    if (matchSquad.some((player) => player.id === squadPlayer.id)) return;
+
+    // Znajdź pierwsze puste miejsce w składzie (obiekt bez id)
+    const firstEmptySlotIndex = matchSquad.findIndex((player) => !player.id);
+
+    if (firstEmptySlotIndex !== -1) {
+      // Wstaw zawodnika w pierwsze wolne miejsce
+      setMatchSquad((squadPlayers) => {
+        const newSquad = [...squadPlayers];
+        newSquad[firstEmptySlotIndex] = squadPlayer;
+        return newSquad;
+      });
+
+      // Usuń zawodnika z listy dostępnych
+      setPlayers((players) =>
+        players.filter((player) => player.id !== squadPlayer.id)
+      );
+    }
   };
 
   ///// --- EDIT PLAYER --- /////
@@ -74,9 +85,14 @@ export default function App() {
     });
   };
 
-  // const handleMoveUp = () => moveItem(index, index - 1);
-
-  // const handleMoveDown = () => moveItem(index, index + 1);
+  const moveItemInSquad = (fromIndex, toIndex) => {
+    setMatchSquad((prevItems) => {
+      const updatedItems = [...prevItems];
+      const itemToMove = updatedItems.splice(fromIndex, 1)[0];
+      updatedItems.splice(toIndex, 0, itemToMove);
+      return updatedItems;
+    });
+  };
 
   const handleRemovePlayer = (id) => {
     if (window.confirm("Are you sure you want to remove this player?")) {
@@ -84,6 +100,21 @@ export default function App() {
     } else {
       return;
     }
+  };
+
+  const handleRemoveFromSquad = (id) => {
+    // Znajdź zawodnika, który ma zostać usunięty ze składu
+    const playerToRemove = matchSquad.find((player) => player.id === id);
+
+    // Przywróć zawodnika na listę dostępnych
+    setPlayers((players) => [...players, playerToRemove]);
+
+    // Ustaw miejsce po usuniętym zawodniku na puste (obiekt bez id)
+    setMatchSquad((matchSquad) =>
+      matchSquad.map((squadPlayer) =>
+        squadPlayer.id === id ? {} : squadPlayer
+      )
+    );
   };
 
   function handleShowAddPlayer() {
@@ -104,10 +135,18 @@ export default function App() {
         />
         <PlayersList
           players={players}
+          matchSquad={matchSquad}
           onEdit={handleEditPlayer}
           onRemove={handleRemovePlayer}
+          onMove={moveItem}
+          onAddToSquad={handleAddPlayerToSquad}
         />
-        <SqadList players={players} />
+        <SqadList
+          players={players}
+          matchSquad={matchSquad}
+          onRemove={handleRemoveFromSquad}
+          onMove={moveItemInSquad}
+        />
       </div>
     </>
   );
