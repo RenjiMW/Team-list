@@ -34,6 +34,10 @@ export default function App() {
     setPlayers((players) => [...players, player]);
   };
 
+  /* ===================================
+  ------- ADDING PLAYER TO SQUAD -------
+  =====================================*/
+
   const handleAddPlayerToSquad = (squadPlayer) => {
     // Sprawdzamy, czy zawodnik już jest w składzie
     if (matchSquad.some((player) => player.id === squadPlayer.id)) return;
@@ -41,20 +45,30 @@ export default function App() {
     // Znajdź pierwsze puste miejsce w składzie (obiekt bez id)
     const firstEmptySlotIndex = matchSquad.findIndex((player) => !player.id);
 
+    // Jeżeli jest puste miejsce, wstaw zawodnika w to miejsce
     if (firstEmptySlotIndex !== -1) {
-      // Wstaw zawodnika w pierwsze wolne miejsce
       setMatchSquad((squadPlayers) => {
         const newSquad = [...squadPlayers];
         newSquad[firstEmptySlotIndex] = squadPlayer;
         return newSquad;
       });
 
-      // Usuń zawodnika z listy dostępnych
+      setPlayers((players) =>
+        players.filter((player) => player.id !== squadPlayer.id)
+      );
+    }
+
+    // Jeżeli nie ma pustego miejsca i liczba zawodników jest poniżej 23, dodaj nowe miejsce
+    else if (matchSquad.length < 23) {
+      setMatchSquad((squadPlayers) => [...squadPlayers, squadPlayer]);
       setPlayers((players) =>
         players.filter((player) => player.id !== squadPlayer.id)
       );
     }
   };
+
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
 
   ///// --- EDIT PLAYER --- /////
   const handleEditPlayer = (id, newValues) => {
@@ -102,20 +116,66 @@ export default function App() {
     }
   };
 
+  /* ===================================
+  ----- REMOVING PLAYER FROM SQUAD -----
+  =====================================*/
+
   const handleRemoveFromSquad = (id) => {
-    // Znajdź zawodnika, który ma zostać usunięty ze składu
-    const playerToRemove = matchSquad.find((player) => player.id === id);
+    if (id > 13 && id < 23) {
+      console.log(
+        `Deleting empty slot (between 16 to 23) and it's exact number is ${
+          id + 1
+        }`
+      );
 
-    // Przywróć zawodnika na listę dostępnych
-    setPlayers((players) => [...players, playerToRemove]);
+      setMatchSquad((matchSquad) => {
+        const updatedSquad = matchSquad.filter((player, index) => index !== id);
+        return updatedSquad;
+      });
+    } else {
+      const playerToRemove = matchSquad.find((player) => player.id === id);
+      const indexPlayerToRemove = matchSquad.indexOf(playerToRemove);
 
-    // Ustaw miejsce po usuniętym zawodniku na puste (obiekt bez id)
-    setMatchSquad((matchSquad) =>
-      matchSquad.map((squadPlayer) =>
-        squadPlayer.id === id ? {} : squadPlayer
-      )
-    );
+      console.log(`index to remove ${indexPlayerToRemove}`);
+      console.log(`Removerd player name ${playerToRemove.playerName}`);
+
+      if (!playerToRemove) {
+        console.log("Player not found in the squad");
+        return;
+      }
+
+      // Przywróć zawodnika na listę dostępnych
+      setPlayers((players) => {
+        if (Object.keys(playerToRemove).length === 0) {
+          return players;
+        }
+        return [...players, playerToRemove];
+      });
+
+      setMatchSquad((matchSquad) => {
+        let updatedSquad;
+
+        if (indexPlayerToRemove <= 14) {
+          updatedSquad = matchSquad.map((squadPlayer) =>
+            squadPlayer.id === id ? {} : squadPlayer
+          );
+        } else if (matchSquad.length >= 16 && indexPlayerToRemove > 14) {
+          console.log(matchSquad.length);
+          updatedSquad = matchSquad.filter(
+            (player, index) => index !== indexPlayerToRemove
+          );
+          console.log(matchSquad.length);
+        }
+
+        return updatedSquad;
+      });
+
+      console.log(" ========== end of function ========== ");
+    }
   };
+
+  //////////////////////////////////////////
+  //////////////////////////////////////////
 
   function handleShowAddPlayer() {
     setShowAddPlayer((show) => !show);
@@ -123,10 +183,18 @@ export default function App() {
 
   return (
     <>
-      <div className="appHeader">
-        <h1>Simple Rugby Team Manager</h1>
-      </div>
       <div className="userInterface">
+        <div className="appHeader">
+          <h1 className="appHeader__mainHeader">
+            Squad
+            <br />
+            assembler
+          </h1>
+          <h2 className="appHeader__secondaryHeader">
+            Simple Rugby Team Manager
+          </h2>
+        </div>
+
         <ActionBar
           onAddPlayer={handleShowAddPlayer}
           showAddPlayer={showAddPlayer}

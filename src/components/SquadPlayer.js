@@ -16,7 +16,11 @@ export default function SquadPlayer({
 
   return (
     <li className="squadPlayer">
+      {/*==============================
+      ----------- PLAYER INFO ----------
+      {/*============================== */}
       <div className="squadPlayer__info">
+        {/* ====== Player avatar ====== */}
         {isError ? (
           <img
             src="\assets\images\avatar 2.webp"
@@ -33,12 +37,18 @@ export default function SquadPlayer({
             className="squadPlayer__info__img"
           ></img>
         )}
-        <div className="squadPlayer__info__header"></div>
-        <h2>{player.playerName}</h2>
-        <h1 className="squadPlayer__number">{index + 1}</h1>
+
+        {/* ====== Player name ====== */}
+        <h2 className="squadPlayer__info__name">{player.playerName}</h2>
+
+        {/* ====== Position number ====== */}
+        <h1 className="squadPlayer__info__number">{index + 1}</h1>
       </div>
 
-      <div className="player__action">
+      {/*==============================
+      ----------- ACTION BAR ----------
+      {/*============================== */}
+      <div className="squadPlayer__action">
         <button onClick={() => onMove(index, index - 1)} disabled={index === 0}>
           🔼
         </button>

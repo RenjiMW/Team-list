@@ -10,26 +10,40 @@ import SquadSlot from "./SquadSlot";
 export default function SqadList({ players, onRemove, onMove, matchSquad }) {
   return (
     <div className="sqadList">
-      <h1>Sqad List</h1>
+      <h1 className="source-code-pro-tableHeaders">Sqad list</h1>
+
+      {/* Log to console 
       <Button
         onClick={() => {
           console.log(matchSquad);
         }}
       >
         Log squad to console
-      </Button>
-      <ul>
-        {matchSquad.map((squadPlayer, index) => (
-          <SquadPlayer
-            player={squadPlayer}
-            key={squadPlayer.id}
-            index={index}
-            onRemove={onRemove}
-            onMove={onMove}
-            matchSquad={matchSquad}
-            matchSquadLength={matchSquad.length}
-          />
-        ))}
+      </Button> 
+      */}
+
+      <ul className="squadList__list">
+        {matchSquad.map((squadPlayer, index) =>
+          // Sprawdzamy, czy squadPlayer jest pustym obiektem
+          Object.keys(squadPlayer).length === 0 ? (
+            <SquadSlot
+              key={index}
+              index={index}
+              player={squadPlayer}
+              onRemove={onRemove}
+            /> // Renderujemy EmptySlot dla pustych miejsc
+          ) : (
+            <SquadPlayer
+              player={squadPlayer}
+              key={squadPlayer.id || index} // Zastosowanie index jako klucza rezerwowego
+              index={index}
+              onRemove={onRemove}
+              onMove={onMove}
+              matchSquad={matchSquad}
+              matchSquadLength={matchSquad.length}
+            />
+          )
+        )}
       </ul>
     </div>
   );

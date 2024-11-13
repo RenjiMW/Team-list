@@ -11,8 +11,14 @@ export default function ActionBar({
 }) {
   return (
     <div className="actionBar">
-      <h1>Action Bar</h1>
-      <Button onClick={onAddPlayer}>Add new player</Button>
+      {/* <h1>Action Bar</h1> */}
+
+      {/* <Button onClick={onAddPlayer}>Add new player</Button> */}
+      <button onClick={onAddPlayer} class="buttonAdd">
+        <span className="actionBar__btnText">ADD NEW PLAYER</span>
+      </button>
+
+      {/* Log to console btn
       <button
         type="button"
         onClick={() => {
@@ -20,7 +26,9 @@ export default function ActionBar({
         }}
       >
         Log players into dev console
-      </button>
+      </button> 
+      */}
+
       <div className="playerPreview">
         {showAddPlayer && (
           <FormAddPlayer onConfirmNewPlayer={onConfirmNewPlayer} />
@@ -32,8 +40,6 @@ export default function ActionBar({
 
 ///////////////////////////////////////////
 /////////// PLAYER ADDING FORM ////////////
-
-// Użyj kodu z linijki 146 do 188 z aplikacji eat-n-split
 
 function FormAddPlayer({ onConfirmNewPlayer }) {
   const [playerName, setPlayerName] = useState("");
@@ -80,7 +86,6 @@ function FormAddPlayer({ onConfirmNewPlayer }) {
         </div>
         <div>
           <button type="submit">CONFIRM</button>
-          <button type="button">CANCEL</button>
         </div>
       </form>
     </>

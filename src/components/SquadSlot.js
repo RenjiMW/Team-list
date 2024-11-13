@@ -1,13 +1,19 @@
 import { useState } from "react";
 
-export default function SquadSlot({ player }) {
+export default function SquadSlot({ player, key, index, onRemove }) {
   return (
     <li className="squadSlot">
-      <div>
-        {player && player.id ? (
-          <h3>{player.playerName}</h3>
+      <div className="squadSlot__div">
+        <h3>Empty Slot </h3>
+        <p className="squadSlot__div__number">{index + 1}</p>
+      </div>
+      <div className="squadSlot__action">
+        {index + 1 > 15 ? (
+          <button type="button" onClick={() => onRemove(index)}>
+            ❌
+          </button>
         ) : (
-          <h3>Empty Slot</h3> // Wyświetlamy "Empty Slot" dla pustych miejsc
+          ""
         )}
       </div>
     </li>

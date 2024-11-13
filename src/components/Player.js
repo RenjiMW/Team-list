@@ -51,6 +51,9 @@ export default function Player({
 
   return (
     <li className="player">
+      {/* ===================================
+      ---------- AVATAR AND NAME ---------- 
+      =====================================*/}
       <div className="player__info">
         {isError ? (
           <img
@@ -71,6 +74,9 @@ export default function Player({
         <h2 className="player__info__header">{player.playerName}</h2>
       </div>
 
+      {/* ===================================
+      ------------- MAIN BUTTONS ------------
+      =====================================*/}
       <div className="player__action">
         <button onClick={() => onMove(index, index - 1)} disabled={index === 0}>
           🔼
@@ -89,7 +95,7 @@ export default function Player({
               }
             }}
           >
-            🔧
+            📃
           </button>
 
           <button onClick={() => onAddToSquad(player)}>➕</button>
@@ -102,6 +108,11 @@ export default function Player({
           🔽
         </button>
       </div>
+
+      {/* ===================================
+      ----------- EDIT FORM ELMENT ----------
+      ----- showed when 🔧 is clicked  -----
+      =====================================*/}
 
       {showEditForm && (
         <EditForm
@@ -124,6 +135,11 @@ export default function Player({
         />
       )}
 
+      {/* ===================================
+      ----------- POPPERTIES LIST ----------
+      ----- showed when 📃 is clicked  -----
+      =====================================*/}
+
       {showPropperties && (
         <div className="player__action__propperties">
           <div className="player__action__propperties__names">
@@ -143,42 +159,43 @@ export default function Player({
         </div>
       )}
 
+      {/* ===================================
+      ---------- ADDITIONAL BUTTONS ---------- 
+      =====================================*/}
       {showOptions && (
         <>
           <div className="player__action__options">
-            <ul>
-              <li>
-                {/*Remove button */}
-                <button
-                  type="button"
-                  onClick={() => onRemove(player.id)}
-                  className="player__action__button"
-                >
-                  Remove
-                </button>
-              </li>
+            {/*=============================
+                --------- REMOVE button ---------
+                ==============================*/}
+            <button
+              type="button"
+              onClick={() => onRemove(player.id)}
+              className="player__action__button"
+            >
+              ❌ Remove
+            </button>
 
-              <li>
-                {/*Hide button */}
+            {/* Hide button - will be implemented in the future
+             
                 <button type="button" className="player__action__button">
                   Hide
                 </button>
-              </li>
+             */}
 
-              <li>
-                {/*Edit button */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleShowPropperties();
-                    handleShowEditForm();
-                  }}
-                  className="player__action__button"
-                >
-                  Edit
-                </button>
-              </li>
-            </ul>
+            {/*=============================
+                --------- EDIT button ---------
+                ==============================*/}
+            <button
+              type="button"
+              onClick={() => {
+                handleShowPropperties();
+                handleShowEditForm();
+              }}
+              className="player__action__button"
+            >
+              🔧 <p>Edit</p>
+            </button>
           </div>
         </>
       )}
@@ -186,8 +203,10 @@ export default function Player({
   );
 }
 
-/////////////////////////////////////////
-/////////// EDIT PLAYER FORM ////////////
+/* ==========================================
+-------------- EDIT FORM ELMENT -------------
+------- showed when 🔧 is clicked  ---------
+============================================*/
 function EditForm({
   player,
   onAvatarChange,

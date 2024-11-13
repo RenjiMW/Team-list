@@ -3,4 +3,23 @@
   border: 1px solid red;
   border-radius: 7px;
   background-color: rgb(40, 36, 104);
+  padding: 5px 3px;
+  display: flex;
+  justify-content: space-between;
+
+  &__div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &__number {
+      font-size: 2em;
+      margin-right: 5%;
+    }
+  }
+
+  &__action {
+    width: 45px;
+    background-color: rgb(40, 36, 104);
+  }
 }

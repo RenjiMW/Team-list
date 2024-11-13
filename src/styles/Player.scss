@@ -2,7 +2,7 @@
 
 .player {
   margin: 3px;
-  border: 1px solid red;
+  border: 1px solid black;
   border-radius: 7px;
   display: grid;
   grid-template-columns: auto 76px;
@@ -77,20 +77,25 @@
       width: 76px;
     }
 
-    &__options {
-      background-color: beige;
-      text-align: right;
-      margin-left: auto;
-      & button {
-        width: 76px;
-      }
-    }
-
     &__mainBtns {
       display: flex;
 
       & button {
         width: 50%;
+      }
+    }
+
+    &__options {
+      background-color: beige;
+      text-align: right;
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      & button {
+        width: 76px;
+        height: 100%;
       }
     }
   }
