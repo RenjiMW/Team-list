@@ -49,6 +49,10 @@ export default function Player({
     setShowPropperties((show) => !show);
   }
 
+  function isTraitAdded(playerTrait) {
+    return playerTrait ? playerTrait : <span>&nbsp;</span>;
+  }
+
   return (
     <li className="player">
       {/* ===================================
@@ -150,11 +154,11 @@ export default function Player({
             <p>matches:</p>
           </div>
           <div className="player__action__propperties__values">
-            <p>{position}</p>
-            <p>{age}</p>
-            <p>{weight}</p>
-            <p>{height}</p>
-            <p>{matches}</p>
+            <p>{isTraitAdded(position)}</p>
+            <p>{isTraitAdded(age)}</p>
+            <p>{isTraitAdded(weight)}</p>
+            <p>{isTraitAdded(height)}</p>
+            <p>{isTraitAdded(matches)}</p>
           </div>
         </div>
       )}
@@ -173,7 +177,7 @@ export default function Player({
               onClick={() => onRemove(player.id)}
               className="player__action__button"
             >
-              ❌ Remove
+              🔥 Remove
             </button>
 
             {/* Hide button - will be implemented in the future
@@ -242,7 +246,7 @@ function EditForm({
   return (
     <div className="player__editForm">
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="player__editForm__playerTrait">
           <label className="player__editForm__label">Photo</label>
           <input
             id="photo"
@@ -253,7 +257,7 @@ function EditForm({
           ></input>
         </div>
 
-        <div>
+        <div className="player__editForm__playerTrait">
           <label className="player__editForm__label">Position</label>
           <input
             className="player__editForm__inputField"
@@ -263,7 +267,7 @@ function EditForm({
           ></input>
         </div>
 
-        <div>
+        <div className="player__editForm__playerTrait">
           <label className="player__editForm__label">Age</label>
           <input
             className="player__editForm__inputField"
@@ -273,27 +277,29 @@ function EditForm({
           ></input>
         </div>
 
-        <div>
+        <div className="player__editForm__playerTrait">
           <label className="player__editForm__label">Weight</label>
           <input
             className="player__editForm__inputField"
             type="text"
             value={weight}
+            placeholder="kg"
             onChange={(e) => onWeightChange(e.target.value)}
           ></input>
         </div>
 
-        <div>
+        <div className="player__editForm__playerTrait">
           <label className="player__editForm__label">Height</label>
           <input
             className="player__editForm__inputField"
             type="text"
             value={height}
+            placeholder="cm"
             onChange={(e) => onHeightChange(e.target.value)}
           ></input>
         </div>
 
-        <div>
+        <div className="player__editForm__playerTrait">
           <label className="player__editForm__label">Matches played</label>
           <input
             className="player__editForm__inputField"
@@ -303,17 +309,10 @@ function EditForm({
           ></input>
         </div>
 
-        <div>
+        <div className="player__editForm__confirmBtn">
           <button type="submit">CONFIRM</button>
         </div>
       </form>
-      <Button
-        onClick={() => {
-          console.log(player);
-        }}
-      >
-        {`Log ${player.playerName} to console`}
-      </Button>
     </div>
   );
 }

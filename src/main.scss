@@ -1,0 +1,70 @@
+@use "styles/_normalize.scss";
+@use "styles/_actionBar.scss";
+@use "styles/_player.scss";
+@use "styles/_squadList.scss";
+@use "styles/_squadPlayer.scss";
+@use "styles/_squadSlot.scss";
+@use "styles/_scrollBar.scss";
+
+//////////////////////////////
+/* ======= My styles ====== */
+
+body {
+  background-color: rgb(22, 20, 35);
+  color: antiquewhite;
+  background-image: url("../public/assets/images/bg.png"); // ścieżka do obrazu
+  background-size: cover; // pokrywa cały dostępny obszar
+  background-position: center; // centruje obraz w tle
+  background-repeat: no-repeat; // zapobiega powtarzaniu obrazu
+  width: 99vw;
+  height: 100vh;
+}
+
+.appHeader {
+  margin-top: 25px;
+  margin-left: 30px;
+  text-align: left;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+
+  &__mainHeader {
+    font-size: 3.5rem;
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  &__secondaryHeader {
+    font-size: 1.44rem;
+    font-family: "Source Code Pro", monospace;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+  }
+}
+
+/* ============= Font style ============= */
+.source-code-pro-tableHeaders {
+  font-size: 2.5rem;
+  color: rgb(0, 255, 229);
+  font-family: "Source Code Pro", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+////////////////////////////////////////////
+
+/* ===== General style for interface ===== */
+.centered {
+  text-align: center;
+}
+
+.userInterface {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-rows: 20vh 1fr;
+}

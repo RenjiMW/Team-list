@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./App.scss";
+import "./main.scss";
 
 import ActionBar from "./components/ActionBar";
 import PlayersList from "./components/PlayerList";
@@ -11,16 +11,47 @@ import SqadList from "./components/SquadList";
 
 export default function App() {
   const [showAddPlayer, setShowAddPlayer] = useState(false);
+
+  // Availible players list state
   const [players, setPlayers] = useState(() => {
     const savedPlayers = localStorage.getItem("players");
     return savedPlayers ? JSON.parse(savedPlayers) : [];
   });
+  // ==============================================
+
+  // Squad list state
   const [matchSquad, setMatchSquad] = useState(() => {
     const savedSquad = localStorage.getItem("matchSquad");
     return savedSquad
       ? JSON.parse(savedSquad)
-      : [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+      : [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+        ];
   });
+
+  // ==============================================
 
   useEffect(() => {
     localStorage.setItem("players", JSON.stringify(players));
@@ -119,59 +150,117 @@ export default function App() {
   /* ===================================
   ----- REMOVING PLAYER FROM SQUAD -----
   =====================================*/
+  // used only with deleting slots after replacement player was removed
+
+  // const handleRemoveFromSquad = (id) => {
+  //   if (id > 13 && id < 23) {
+  //     console.log(
+  //       `Deleting empty slot (between 16 to 23) and it's exact number is ${
+  //         id + 1
+  //       }`
+  //     );
+
+  //     setMatchSquad((matchSquad) => {
+  //       const updatedSquad = matchSquad.filter((player, index) => index !== id);
+  //       return updatedSquad;
+  //     });
+  //   } else {
+  //     const playerToRemove = matchSquad.find((player) => player.id === id);
+  //     const indexPlayerToRemove = matchSquad.indexOf(playerToRemove);
+
+  //     // console.log(`index to remove ${indexPlayerToRemove}`);
+  //     // console.log(`Removerd player name ${playerToRemove.playerName}`);
+
+  //     if (!playerToRemove) {
+  //       console.log("Player not found in the squad");
+  //       return;
+  //     }
+
+  //     // Przywróć zawodnika na listę dostępnych
+  //     setPlayers((players) => {
+  //       if (Object.keys(playerToRemove).length === 0) {
+  //         return players;
+  //       }
+  //       return [...players, playerToRemove];
+  //     });
+
+  //     setMatchSquad((matchSquad) => {
+  //       let updatedSquad;
+
+  //       if (indexPlayerToRemove <= 14) {
+  //         updatedSquad = matchSquad.map((squadPlayer) =>
+  //           squadPlayer.id === id ? {} : squadPlayer
+  //         );
+  //       } else if (matchSquad.length >= 16 && indexPlayerToRemove > 14) {
+  //         console.log(matchSquad.length);
+  //         updatedSquad = matchSquad.filter(
+  //           (player, index) => index !== indexPlayerToRemove
+  //         );
+  //         console.log(matchSquad.length);
+  //       }
+
+  //       return updatedSquad;
+  //     });
+
+  //     console.log(" ========== end of function ========== ");
+  //   }
+  // };
+
+  /* ===================================
+  ----- REMOVING PLAYER FROM SQUAD -----
+  =====================================*/
+  /// used when NOT deleting slots after replacement player is removed
 
   const handleRemoveFromSquad = (id) => {
-    if (id > 13 && id < 23) {
-      console.log(
-        `Deleting empty slot (between 16 to 23) and it's exact number is ${
-          id + 1
-        }`
-      );
+    // This part was used to delete slots of replacement players after removing those players
+    // if (id > 13 && id < 23) {
+    //   console.log(
+    //     `Deleting empty slot (between 16 to 23) and it's exact number is ${
+    //       id + 1
+    //     }`
+    //   );
 
-      setMatchSquad((matchSquad) => {
-        const updatedSquad = matchSquad.filter((player, index) => index !== id);
-        return updatedSquad;
-      });
-    } else {
-      const playerToRemove = matchSquad.find((player) => player.id === id);
-      const indexPlayerToRemove = matchSquad.indexOf(playerToRemove);
+    //   setMatchSquad((matchSquad) => {
+    //     const updatedSquad = matchSquad.filter((player, index) => index !== id);
+    //     return updatedSquad;
+    //   });
+    // } else {
+    const playerToRemove = matchSquad.find((player) => player.id === id);
+    // const indexPlayerToRemove = matchSquad.indexOf(playerToRemove);
 
-      console.log(`index to remove ${indexPlayerToRemove}`);
-      console.log(`Removerd player name ${playerToRemove.playerName}`);
-
-      if (!playerToRemove) {
-        console.log("Player not found in the squad");
-        return;
-      }
-
-      // Przywróć zawodnika na listę dostępnych
-      setPlayers((players) => {
-        if (Object.keys(playerToRemove).length === 0) {
-          return players;
-        }
-        return [...players, playerToRemove];
-      });
-
-      setMatchSquad((matchSquad) => {
-        let updatedSquad;
-
-        if (indexPlayerToRemove <= 14) {
-          updatedSquad = matchSquad.map((squadPlayer) =>
-            squadPlayer.id === id ? {} : squadPlayer
-          );
-        } else if (matchSquad.length >= 16 && indexPlayerToRemove > 14) {
-          console.log(matchSquad.length);
-          updatedSquad = matchSquad.filter(
-            (player, index) => index !== indexPlayerToRemove
-          );
-          console.log(matchSquad.length);
-        }
-
-        return updatedSquad;
-      });
-
-      console.log(" ========== end of function ========== ");
+    if (!playerToRemove) {
+      console.log("Player not found in the squad");
+      return;
     }
+
+    // Przywróć zawodnika na listę dostępnych
+    setPlayers((players) => {
+      if (Object.keys(playerToRemove).length === 0) {
+        return players;
+      }
+      return [...players, playerToRemove];
+    });
+
+    setMatchSquad((matchSquad) => {
+      let updatedSquad;
+
+      // if (indexPlayerToRemove <= 14) {
+      updatedSquad = matchSquad.map((squadPlayer) =>
+        squadPlayer.id === id ? {} : squadPlayer
+      );
+      // } else if (matchSquad.length >= 16 && indexPlayerToRemove > 14) {
+      // console.log(matchSquad.length);
+      // updatedSquad = matchSquad.filter(
+      //   (player, index) => index !== indexPlayerToRemove
+      // );
+      // console.log(matchSquad.length);
+      // }
+
+      return updatedSquad;
+    });
+
+    console.log(" ========== end of function ========== ");
+    // }
   };
 
   //////////////////////////////////////////

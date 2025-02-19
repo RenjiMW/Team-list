@@ -22,7 +22,7 @@
     max-height: 61px;
 
     &__img {
-      height: 60px;
+      height: 40px;
       width: auto;
       object-fit: initial;
     }
@@ -42,12 +42,29 @@
   /*============================== */
 
   &__action {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "delete arrow1"
+      "delete arrow2";
 
     & button {
+      margin-right: 3px;
+      font-size: 0.7rem;
       text-align: center;
-      width: 40px;
+      width: 20px;
+    }
+
+    &__delete {
+      grid-area: delete;
+      height: 20px;
+    }
+
+    &__btnText {
+      position: relative;
+      right: 5px;
     }
   }
 }

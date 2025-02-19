@@ -49,17 +49,21 @@ export default function SquadPlayer({
       ----------- ACTION BAR ----------
       {/*============================== */}
       <div className="squadPlayer__action">
-        <button onClick={() => onMove(index, index - 1)} disabled={index === 0}>
-          🔼
+        <button
+          className="squadPlayer__action__delete"
+          type="button"
+          onClick={() => onRemove(player.id)}
+        >
+          <span className="squadPlayer__action__btnText">❌</span>
         </button>
-        <button type="button" onClick={() => onRemove(player.id)}>
-          ❌
+        <button onClick={() => onMove(index, index - 1)} disabled={index === 0}>
+          <span className="squadPlayer__action__btnText">🔼</span>
         </button>
         <button
           onClick={() => onMove(index, index + 1)}
           disabled={index === matchSquadLength - 1}
         >
-          🔽
+          <span className="squadPlayer__action__btnText">🔽</span>
         </button>
       </div>
     </li>

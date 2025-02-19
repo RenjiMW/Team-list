@@ -8,13 +8,13 @@ export default function SquadSlot({ player, key, index, onRemove }) {
         <p className="squadSlot__div__number">{index + 1}</p>
       </div>
       <div className="squadSlot__action">
-        {index + 1 > 15 ? (
+        {/* {index + 1 > 15 ? (
           <button type="button" onClick={() => onRemove(index)}>
             ❌
           </button>
         ) : (
           ""
-        )}
+        )} */}
       </div>
     </li>
   );

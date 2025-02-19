@@ -11,27 +11,36 @@ export default function ActionBar({
 }) {
   return (
     <div className="actionBar">
-      {/* <h1>Action Bar</h1> */}
-
-      {/* <Button onClick={onAddPlayer}>Add new player</Button> */}
-      <button onClick={onAddPlayer} class="buttonAdd">
+      <button onClick={onAddPlayer} class="actionBar__buttonAdd">
         <span className="actionBar__btnText">ADD NEW PLAYER</span>
+        <span className="actionBar__btnIcon">&nbsp;</span>
       </button>
 
-      {/* Log to console btn
-      <button
-        type="button"
-        onClick={() => {
-          console.log(players);
-        }}
-      >
-        Log players into dev console
-      </button> 
-      */}
+      <div className="actionBar__appDescription">
+        <h3 className="actionBar__appDescription__mainTitle">
+          App description
+        </h3>
+
+        <h4 className="actionBar__appDescription__secondTitle">
+          This is a simple rugby squad builder. You can use it to:
+        </h4>
+
+        <ul className="actionBar__appDescription__list">
+          <li>
+            Add a player's name to the list along with a URL to their photo
+          </li>
+          <li>Manage the display order on the list or remove players</li>
+          <li>Add information about players</li>
+          <li>Move players to the squad and manage positions</li>
+        </ul>
+      </div>
 
       <div className="playerPreview">
         {showAddPlayer && (
-          <FormAddPlayer onConfirmNewPlayer={onConfirmNewPlayer} />
+          <FormAddPlayer
+            onAddPlayer={onAddPlayer}
+            onConfirmNewPlayer={onConfirmNewPlayer}
+          />
         )}
       </div>
     </div>
@@ -41,7 +50,7 @@ export default function ActionBar({
 ///////////////////////////////////////////
 /////////// PLAYER ADDING FORM ////////////
 
-function FormAddPlayer({ onConfirmNewPlayer }) {
+function FormAddPlayer({ onAddPlayer, onConfirmNewPlayer }) {
   const [playerName, setPlayerName] = useState("");
   const [avatar, setAvatar] = useState("/assets/images/avatar.webp");
 
@@ -66,7 +75,7 @@ function FormAddPlayer({ onConfirmNewPlayer }) {
   return (
     <>
       <form className="form-add-player" onSubmit={handleSubmit}>
-        <div>
+        <div className="form-add-player__inputs">
           <label>Name/Nickname: </label>
           <input
             type="text"
@@ -74,8 +83,8 @@ function FormAddPlayer({ onConfirmNewPlayer }) {
             onChange={(e) => setPlayerName(e.target.value)}
           ></input>
         </div>
-        <div>
-          <label>Image URL</label>
+        <div className="form-add-player__inputs">
+          <label>Image URL: </label>
           <input
             type="text"
             placeholder="url"
@@ -84,8 +93,17 @@ function FormAddPlayer({ onConfirmNewPlayer }) {
             }
           ></input>
         </div>
-        <div>
-          <button type="submit">CONFIRM</button>
+        <div className="centered">
+          <button className="form-add-player__button" type="submit">
+            Ok
+          </button>
+          <button
+            className="form-add-player__button"
+            onClick={onAddPlayer}
+            type="button"
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </>

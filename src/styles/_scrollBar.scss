@@ -1,0 +1,20 @@
+/* ======== Scroll bar ======== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(40, 36, 104) rgb(82, 85, 107);
+}
+
+/* Styles for Webkit browsers like Chrome, Safari, and newer versions of Edge */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(82, 85, 107);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(40, 36, 104);
+  border-radius: 2px;
+  border: 1px solid rgb(82, 85, 107);
+}

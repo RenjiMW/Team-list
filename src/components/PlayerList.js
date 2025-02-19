@@ -20,7 +20,9 @@ export default function PlayersList({
   return (
     <>
       <div className="playersList">
-        <h1 className="source-code-pro-tableHeaders">Avalible players</h1>
+        <h1 className="source-code-pro-tableHeaders">
+          Avalible players [{players.length}]
+        </h1>
         <div className="playersList__list">
           {/* Log to console btn 
       <Button
