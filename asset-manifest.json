@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/team-list/static/css/main.a2cd9c88.css",
+    "main.js": "/team-list/static/js/main.bacad567.js",
+    "static/media/bg.png": "/team-list/static/media/bg.510453078ca26f6204c9.png",
+    "index.html": "/team-list/index.html",
+    "main.a2cd9c88.css.map": "/team-list/static/css/main.a2cd9c88.css.map",
+    "main.bacad567.js.map": "/team-list/static/js/main.bacad567.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a2cd9c88.css",
+    "static/js/main.bacad567.js"
+  ]
+}
